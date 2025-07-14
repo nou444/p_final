@@ -23,11 +23,25 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4 shadow-sm">
                 <div class="container">
                     <a class="navbar-brand fw-bold fs-4" href="#">Objothèque</a>
+
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link active" href="model.php?page=form-ajouter-objet">
+                                <i class="bi bi-plus-circle"></i> Ajouter un objet
+                            </a>
+
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link active" href="model.php?page=fiche-membre&id_membre=1">Fiche membre</a>
+                        </li>
+                    </ul>
+
                     <div class="d-flex">
                         <a class="btn btn-outline-light btn-sm" href="includes/deconnexion.php">Déconnexion</a>
                     </div>
                 </div>
             </nav>
+
         <?php } ?>
 
 

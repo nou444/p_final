@@ -1,3 +1,5 @@
+DROP DATABASE emprunt_objets;
+
 CREATE DATABASE IF NOT EXISTS emprunt_objets;
 USE emprunt_objets;
 
@@ -36,6 +38,8 @@ CREATE TABLE images_objet (
     nom_image VARCHAR(255),
     FOREIGN KEY (id_objet) REFERENCES objet(id_objet)
 );
+
+
 
 -- Table emprunt
 CREATE TABLE emprunt (
@@ -143,3 +147,87 @@ FROM objet o
 JOIN categorie_objet c ON o.id_categorie = c.id_categorie
 LEFT JOIN emprunt e ON o.id_objet = e.id_objet
 ORDER BY o.id_objet;
+
+
+
+
+INSERT INTO images_objet (id_objet, nom_image) VALUES
+(1, 'default'),
+(2, 'default'),
+(3, 'default'),
+(4, 'default'),
+(5, 'default'),
+(6, 'default'),
+(7, 'default'),
+(8, 'default'),
+(9, 'default'),
+(10, 'default'),
+(11, 'default'),
+(12, 'default'),
+(13, 'default'),
+(14, 'default'),
+(15, 'default'),
+(16, 'default'),
+(17, 'default'),
+(18, 'default'),
+(19, 'default'),
+(20, 'default'),
+(21, 'default'),
+(22, 'default'),
+(23, 'default'),
+(24, 'default'),
+(25, 'default'),
+(26, 'default'),
+(27, 'default'),
+(28, 'default'),
+(29, 'default'),
+(30, 'default'),
+(31, 'default'),
+(32, 'default'),
+(33, 'default'),
+(34, 'default'),
+(35, 'default'),
+(36, 'default'),
+(37, 'default'),
+(38, 'default'),
+(39, 'default'),
+(40, 'default');
+
+
+
+CREATE OR REPLACE VIEW vue_objet_image_categorie AS
+SELECT 
+    o.id_objet,
+    o.nom_objet,
+    c.nom_categorie,
+    o.id_categorie,
+    o.id_membre,
+    (
+        SELECT nom_image 
+        FROM images_objet img 
+        WHERE img.id_objet = o.id_objet 
+        ORDER BY img.id_image ASC 
+        LIMIT 1
+    ) AS image_principale
+FROM objet o
+JOIN categorie_objet c ON o.id_categorie = c.id_categorie;
+
+
+
+CREATE OR REPLACE VIEW vue_emprunts_details AS
+SELECT 
+    e.id_emprunt,
+    e.id_objet,
+    m.nom AS nom_membre,
+    e.date_emprunt,
+    e.date_retour
+FROM emprunt e
+JOIN membre m ON m.id_membre = e.id_membre;
+
+
+
+
+
+
+
+
