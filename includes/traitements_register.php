@@ -50,7 +50,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['fichier'])) {
             
         $inscription = insertMembre($nom, $date_naissance, $genre, $email, $ville, $mdp, $newName);
        
-        header('location: ok.php');
+        if(!$inscription){
+            header('location: ../model.php?page=register&&status=existMail');
+            exit;
+
+        }
+
+        header('location: ../model.php?page=connexion&&status=ajoute');
     } else {
         echo "Échec du déplacement du fichier.";
     }

@@ -19,7 +19,7 @@
     <!-- Contenu principal -->
     <main>
         <?php
-
+session_start();
         require('includes/fonctions.php');
         include('pages/' . trim($_GET['page']) . '.php');
 

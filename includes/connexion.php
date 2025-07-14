@@ -6,7 +6,7 @@ function dbConnect()
     $host = '127.0.0.1';
     $utilisateur = 'root';
     $motdepasse = 'fitahiana';
-    $base = 'employees';
+    $base = 'emprunt_objets';
 
    static $connect = null; //tsy maty ivelany fonction
 

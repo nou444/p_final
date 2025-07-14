@@ -1,5 +1,17 @@
 <div class="register-box">
     <h3 class="text-center mb-4">Inscription</h3>
+
+        <!-- Zone d'erreur générale -->
+   
+    <?php
+    if (isset($_GET['status']) && $_GET['status'] == 'existMail') {  ?>
+
+        <div id="loginError" class="error-msg">
+            Adresse e-mail existe deja...
+        </div>
+    <?php     }
+    ?>
+
     <form action="includes/traitements_register.php" method="POST" enctype="multipart/form-data">
       <div class="row">
       

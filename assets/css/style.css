@@ -24,3 +24,11 @@ body {
     border-radius: 1rem;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
+
+
+ .error-msg {
+      color: #dc3545;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      text-align: center;
+    }
