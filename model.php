@@ -26,6 +26,9 @@
 
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item active">
+                            <a class="nav-link active" href="model.php?page=objets">Liste objets</a>
+                        </li>
+                        <li class="nav-item active">
                             <a class="nav-link active" href="model.php?page=form-ajouter-objet">
                                 <i class="bi bi-plus-circle"></i> Ajouter un objet
                             </a>
@@ -34,7 +37,13 @@
                         <li class="nav-item active">
                             <a class="nav-link active" href="model.php?page=fiche-membre&id_membre=1">Fiche membre</a>
                         </li>
+                        <li class="nav-item active">
+                            <a class="nav-link active" href="model.php?page=statistiques">Statistiques</a>
+                        </li>
+
                     </ul>
+
+
 
                     <div class="d-flex">
                         <a class="btn btn-outline-light btn-sm" href="includes/deconnexion.php">Déconnexion</a>

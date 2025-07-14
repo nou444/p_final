@@ -43,9 +43,10 @@ if (!empty($_FILES['images']['name'][0])) {
             if (in_array($mime, $allowedMimeTypes)) {
                 $ext = pathinfo($name, PATHINFO_EXTENSION);
                 $newName = uniqid('img_') . '.' . $ext;
+                
 
                 if (move_uploaded_file($tmp, $uploadDir . $newName)) {
-                    insertImageObjet($id_objet, $newName);
+                    insertImageObjet($id_objet, $name);
                     $imagesTraitees++;
                     echo "Image $newName insérée\n";
                 } else {

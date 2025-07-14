@@ -253,7 +253,7 @@ function supprimerImage($id_image, $nom_image, $id_objet)
     $row = mysqli_fetch_assoc($res);
 
     if ($row['total'] == 0) {
-        mysqli_query($conn, "INSERT INTO images_objet (id_objet, nom_image) VALUES ($id_objet, 'default')");
+        mysqli_query($conn, "INSERT INTO images_objet (id_objet, nom_image) VALUES ($id_objet, 'default.jpg')");
     }
 
     return true;
@@ -332,3 +332,39 @@ function getObjetsParMembreGroupeParCategorie($id_membre) {
 
     return $groupes;
 }
+
+
+function getObjetsEmpruntesNonRetournes($id_membre) {
+    $sql = "SELECT e.id_emprunt, o.nom_objet, c.nom_categorie, e.date_emprunt, o.id_objet
+            FROM emprunt e
+            JOIN objet o ON e.id_objet = o.id_objet
+            JOIN categorie_objet c ON o.id_categorie = c.id_categorie
+            WHERE e.id_membre = $id_membre
+            AND e.date_retour IS NULL
+            ORDER BY e.date_emprunt DESC";
+
+    $res = mysqli_query(dbConnect(), $sql);
+    $data = [];
+
+    while ($row = mysqli_fetch_assoc($res)) {
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
+
+
+function getStatistiquesRetours() {
+    $sql = "SELECT etat_objet, COUNT(*) AS total FROM retour_objet GROUP BY etat_objet";
+    $res = mysqli_query(dbConnect(), $sql);
+    $stats = ['ok' => 0, 'abime' => 0];
+
+    while ($row = mysqli_fetch_assoc($res)) {
+        $etat = $row['etat_objet'];
+        $stats[$etat] = intval($row['total']);
+    }
+
+    return $stats;
+}
+

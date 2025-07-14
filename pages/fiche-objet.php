@@ -29,7 +29,7 @@ if (!$objet) {
       <?php foreach ($objet['images'] as $index => $img) : ?>
         <div class="col-md-3">
           <div class="border rounded p-2 text-center position-relative">
-            <img src="assets/media/<?= htmlspecialchars($img['nom_image']) ?>.jpg" class="img-fluid rounded" style="max-height: 200px;" alt="<?= htmlspecialchars($img['nom_image']) ?>">
+            <img src="assets/media/<?= trim(htmlspecialchars($img['nom_image'])) ?>" class="img-fluid rounded" style="max-height: 200px;" alt="<?= htmlspecialchars($img['nom_image']) ?>">
 
             
             <?php if ($index === 0) : ?>

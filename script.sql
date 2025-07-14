@@ -120,15 +120,15 @@ INSERT INTO objet (nom_objet, id_categorie, id_membre) VALUES
 
 INSERT INTO emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUES
 (1, 2, '2025-07-01', '2025-07-10'),   -- Bob emprunte à Alice
-(12, 1, '2025-07-02', '2025-07-11'),  -- Alice emprunte à Bob
+(12, 1, '2025-07-02', null),  -- Alice emprunte à Bob
 (23, 2, '2025-07-03', '2025-07-12'),  -- Bob emprunte à Claire
 (31, 3, '2025-07-04', '2025-07-13'),  -- Claire emprunte à David
 (4, 4, '2025-07-05', '2025-07-14'),   -- David emprunte à Alice
 (15, 3, '2025-07-06', '2025-07-15'),  -- Claire emprunte à Bob
-(26, 1, '2025-07-07', '2025-07-16'),  -- Alice emprunte à Claire
-(35, 2, '2025-07-08', '2025-07-17'),  -- Bob emprunte à David
+(26, 1, '2025-07-07', null),  -- Alice emprunte à Claire
+(35, 2, '2025-07-08', null),  -- Bob emprunte à David
 (8, 4, '2025-07-09', '2025-07-18'),   -- David emprunte à Alice
-(18, 1, '2025-07-10', '2025-07-19');  -- Alice emprunte à Bob
+(18, 1, '2025-07-10', null);  -- Alice emprunte à Bob
 
 
 
@@ -149,49 +149,47 @@ LEFT JOIN emprunt e ON o.id_objet = e.id_objet
 ORDER BY o.id_objet;
 
 
-
-
 INSERT INTO images_objet (id_objet, nom_image) VALUES
-(1, 'default'),
-(2, 'default'),
-(3, 'default'),
-(4, 'default'),
-(5, 'default'),
-(6, 'default'),
-(7, 'default'),
-(8, 'default'),
-(9, 'default'),
-(10, 'default'),
-(11, 'default'),
-(12, 'default'),
-(13, 'default'),
-(14, 'default'),
-(15, 'default'),
-(16, 'default'),
-(17, 'default'),
-(18, 'default'),
-(19, 'default'),
-(20, 'default'),
-(21, 'default'),
-(22, 'default'),
-(23, 'default'),
-(24, 'default'),
-(25, 'default'),
-(26, 'default'),
-(27, 'default'),
-(28, 'default'),
-(29, 'default'),
-(30, 'default'),
-(31, 'default'),
-(32, 'default'),
-(33, 'default'),
-(34, 'default'),
-(35, 'default'),
-(36, 'default'),
-(37, 'default'),
-(38, 'default'),
-(39, 'default'),
-(40, 'default');
+(1, 'default.jpg'),
+(2, 'default.jpg'),
+(3, 'default.jpg'),
+(4, 'default.jpg'),
+(5, 'default.jpg'),
+(6, 'default.jpg'),
+(7, 'default.jpg'),
+(8, 'default.jpg'),
+(9, 'default.jpg'),
+(10, 'default.jpg'),
+(11, 'default.jpg'),
+(12, 'default.jpg'),
+(13, 'default.jpg'),
+(14, 'default.jpg'),
+(15, 'default.jpg'),
+(16, 'default.jpg'),
+(17, 'default.jpg'),
+(18, 'default.jpg'),
+(19, 'default.jpg'),
+(20, 'default.jpg'),
+(21, 'default.jpg'),
+(22, 'default.jpg'),
+(23, 'default.jpg'),
+(24, 'default.jpg'),
+(25, 'default.jpg'),
+(26, 'default.jpg'),
+(27, 'default.jpg'),
+(28, 'default.jpg'),
+(29, 'default.jpg'),
+(30, 'default.jpg'),
+(31, 'default.jpg'),
+(32, 'default.jpg'),
+(33, 'default.jpg'),
+(34, 'default.jpg'),
+(35, 'default.jpg'),
+(36, 'default.jpg'),
+(37, 'default.jpg'),
+(38, 'default.jpg'),
+(39, 'default.jpg'),
+(40, 'default.jpg');
 
 
 
@@ -224,6 +222,16 @@ SELECT
 FROM emprunt e
 JOIN membre m ON m.id_membre = e.id_membre;
 
+
+
+
+CREATE TABLE retour_objet (
+  id_retour INT AUTO_INCREMENT PRIMARY KEY,
+  id_emprunt INT NOT NULL,
+  etat_objet ENUM('ok', 'abime') NOT NULL,
+  date_retour_effective DATE NOT NULL,
+  FOREIGN KEY (id_emprunt) REFERENCES emprunt(id_emprunt)
+);
 
 
 
