@@ -1,6 +1,21 @@
+html,
 body {
-    background-color: #f1f3f5;
+    background-color: #f3f4f6;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
+
 
 .login-box {
     max-width: 400px;

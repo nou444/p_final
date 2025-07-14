@@ -1,3 +1,11 @@
+<?php
+
+if (isset($_SESSION['user'])) {
+    header('location:includes/deconnexion.php');
+    exit();
+}
+?>
+
 <div class="register-box">
     <h3 class="text-center mb-4">Inscription</h3>
 
