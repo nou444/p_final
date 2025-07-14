@@ -12,7 +12,7 @@ if (isset($_POST['email'])) {
     $login = login($_POST['email'], $_POST['password']);
     if ($login != null && $login != "incorrectMail" && $login != "incorrectPass" && $login != 3) {
         $_SESSION['user'] = $login;
-        header('location:model.php?page=ok');
+        header('location:model.php?page=objets');
         exit();
     }
     

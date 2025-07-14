@@ -116,3 +116,53 @@ function insertMembre($nom, $date_naissance, $genre, $email, $ville, $mdp, $imag
 
     return true;
 }
+
+
+function getAllCategories()
+{
+    $sql = "SELECT * FROM categorie_objet ORDER BY nom_categorie ASC";
+
+    $query = mysqli_query(dbConnect(), $sql);
+    if (!$query) {
+        die("Erreur SQL : " . mysqli_error(dbConnect()));
+    }
+
+    $categories = [];
+    while ($row = mysqli_fetch_assoc($query)) {
+        $categories[] = $row;
+    }
+
+    mysqli_free_result($query);
+    return $categories;
+}
+
+
+
+function chercherObjetsParCategorie($categorie)
+{
+    $sql = "SELECT * FROM vue_objets_emprunts WHERE 1";
+
+    if ($categorie != '') {
+        $sql .= " AND id_categorie = " . intval($categorie);
+    }
+
+    $sql .= " ORDER BY nom_objet ASC";
+   
+
+    $query = mysqli_query(dbConnect(), $sql);
+    if (!$query) {
+        die("Erreur SQL : " . mysqli_error(dbConnect()));
+    }
+
+    $objets = [];
+    while ($ligne = mysqli_fetch_assoc($query)) {
+        $ligne['statut'] = ($ligne['date_retour']) ? "Emprunté jusqu'au " . $ligne['date_retour'] : "Disponible";
+        $objets[] = $ligne;
+    }
+
+    mysqli_free_result($query);
+    return $objets;
+}
+
+
+

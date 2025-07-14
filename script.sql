@@ -47,3 +47,99 @@ CREATE TABLE emprunt (
     FOREIGN KEY (id_objet) REFERENCES objet(id_objet),
     FOREIGN KEY (id_membre) REFERENCES membre(id_membre)
 );
+
+
+INSERT INTO membre (nom, date_naissance, genre, email, ville, mdp, image_profil) VALUES
+('Alice', '1995-04-23', 'Femme', 'alice@email.com', 'Antananarivo', 'Alice', 'alice.jpg'),
+('Bob', '1992-11-12', 'Homme', 'bob@email.com', 'Fianarantsoa', 'Bob', 'bob.jpg'),
+('Claire', '1998-06-07', 'Femme', 'claire@email.com', 'Toamasina', 'Claire', 'claire.jpg'),
+('David', '1990-09-30', 'Homme', 'david@email.com', 'Majunga', 'David', 'david.jpg');
+
+
+INSERT INTO categorie_objet (nom_categorie) VALUES
+('Esthétique'), 
+('Bricolage'), 
+('Mécanique'), 
+('Cuisine');
+
+
+INSERT INTO objet (nom_objet, id_categorie, id_membre) VALUES
+('Sèche-cheveux', 1, 1),
+('Tournevis plat', 2, 1),
+('Clé à molette', 3, 1),
+('Mixeur', 4, 1),
+('Brosse à cheveux', 1, 1),
+('Marteau', 2, 1),
+('Pompe à vélo', 3, 1),
+('Blender', 4, 1),
+('Crème visage', 1, 1),
+('Scie sauteuse', 2, 1);
+
+
+INSERT INTO objet (nom_objet, id_categorie, id_membre) VALUES
+('Tondeuse à barbe', 1, 2),
+('Perceuse', 2, 2),
+('Cric de voiture', 3, 2),
+('Cafetière', 4, 2),
+('Gel coiffant', 1, 2),
+('Tournevis cruciforme', 2, 2),
+('Pompe manuelle', 3, 2),
+('Grille-pain', 4, 2),
+('Parfum', 1, 2),
+('Scie circulaire', 2, 2);
+
+
+INSERT INTO objet (nom_objet, id_categorie, id_membre) VALUES
+('Épilateur électrique', 1, 3),
+('Boîte à outils', 2, 3),
+('Manomètre', 3, 3),
+('Micro-ondes', 4, 3),
+('Crème solaire', 1, 3),
+('Pince multiprise', 2, 3),
+('Pompe à air', 3, 3),
+('Four électrique', 4, 3),
+('Rouge à lèvres', 1, 3),
+('Scie à métaux', 2, 3);
+
+
+INSERT INTO objet (nom_objet, id_categorie, id_membre) VALUES
+('Rasoir électrique', 1, 4),
+('Tournevis électrique', 2, 4),
+('Compresseur', 3, 4),
+('Friteuse', 4, 4),
+('Gel douche', 1, 4),
+('Clé dynamométrique', 2, 4),
+('Pompe hydraulique', 3, 4),
+('Robot cuiseur', 4, 4),
+('Crème coiffante', 1, 4),
+('Marteau-piqueur', 2, 4);
+
+INSERT INTO emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUES
+(1, 2, '2025-07-01', '2025-07-10'),   -- Bob emprunte à Alice
+(12, 1, '2025-07-02', '2025-07-11'),  -- Alice emprunte à Bob
+(23, 2, '2025-07-03', '2025-07-12'),  -- Bob emprunte à Claire
+(31, 3, '2025-07-04', '2025-07-13'),  -- Claire emprunte à David
+(4, 4, '2025-07-05', '2025-07-14'),   -- David emprunte à Alice
+(15, 3, '2025-07-06', '2025-07-15'),  -- Claire emprunte à Bob
+(26, 1, '2025-07-07', '2025-07-16'),  -- Alice emprunte à Claire
+(35, 2, '2025-07-08', '2025-07-17'),  -- Bob emprunte à David
+(8, 4, '2025-07-09', '2025-07-18'),   -- David emprunte à Alice
+(18, 1, '2025-07-10', '2025-07-19');  -- Alice emprunte à Bob
+
+
+
+CREATE OR REPLACE VIEW vue_objets_emprunts AS
+SELECT 
+    o.id_objet,
+    o.nom_objet,
+    c.nom_categorie,
+    o.id_categorie,
+    o.id_membre,
+    e.id_emprunt,
+    e.id_membre AS id_emprunteur,
+    e.date_emprunt,
+    e.date_retour
+FROM objet o
+JOIN categorie_objet c ON o.id_categorie = c.id_categorie
+LEFT JOIN emprunt e ON o.id_objet = e.id_objet
+ORDER BY o.id_objet;
