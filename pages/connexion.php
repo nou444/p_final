@@ -26,7 +26,7 @@ if (isset($_POST['email'])) {
     <!-- Zone d'erreur générale -->
 
     <?php
-    if ($login == 'incorrectMail') {  ?>
+    if (isset($login) && $login == 'incorrectMail') {  ?>
 
         <div id="loginError" class="error-msg">
             Adresse e-mail  incorrect.
@@ -35,7 +35,7 @@ if (isset($_POST['email'])) {
     ?>
 
     <?php
-    if ($login == 'incorrectPass') {  ?>
+    if (isset($login) &&  $login == 'incorrectPass') {  ?>
 
         <div id="loginError" class="error-msg">
             Mot de passe incorrect.
@@ -45,7 +45,7 @@ if (isset($_POST['email'])) {
 
 
     <?php
-    if ($login == 3) {  ?>
+    if ( isset($login) && $login == 3) {  ?>
 
         <div id="loginError" class="error-msg">
             Remplir tous les champs!
